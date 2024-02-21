@@ -1,9 +1,11 @@
-export const capitalize = () => {
-    // todo: build this function
-    // `capitalize("jOn")` should output `"Jon"`
+export const isNameValidation = (name:string) => {
+    return /^[a-zA-Z]+$/.test(name) && name.length > 2;
 }
 
-export const formatPhoneNumber = () => {
-    // todo: build this function
-    // `formatPhoneNumber("1234567")` should be `"12-34-56-7"`
+export const formatPhoneNumber = (phone: string[]): string => {
+    if (phone.every((part: string) => part !== "" && /^\d+$/.test(part))) {
+        return phone.join("-");
+      } else {
+        return "";
+      }
 }

@@ -1,30 +1,27 @@
 import { Component } from "react";
 import { ClassForm } from "./ClassForm";
-import { UserInformation } from "../types";
+import { UserInformation, ClassAppState, SubmitHandler } from "../types";
 import { ProfileInformation } from "../ProfileInformation";
-type State = { userInformation: UserInformation | null };
 
-const defaultUser: UserInformation = {
-  email: "default@default.com",
-  firstName: "Default",
-  lastName: "Default",
-  phone: "1234567",
-  city: "Hobbiton",
-};
-
-export class ClassApp extends Component<Record<string, never>, State> {
+export class ClassApp extends Component<UserInformation, ClassAppState> {
+  state: ClassAppState = {
+    userData: null,
+  };
+  handleSubmitApp: SubmitHandler = (formData, isValid) => {
+    if (isValid) {
+      this.setState((prevState) => ({
+        userData: { ...prevState.userData, ...formData },
+      }));
+    } else {
+      alert("Correct the input and try again!");
+    }
+  };
   render() {
     return (
       <>
         <h2>Class</h2>
-        <ProfileInformation
-          userData={
-            // toggle the following lines to change
-            // null
-            defaultUser
-          }
-        />
-        <ClassForm />
+        <ProfileInformation userData={this.state.userData} />
+        <ClassForm onSubmit={this.handleSubmitApp} />
       </>
     );
   }

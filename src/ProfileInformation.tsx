@@ -1,6 +1,6 @@
 import { UserInformation } from "./types";
 
-export const InfoRow = ({ label, value }: { label: string; value: string }) => {
+export const InfoRow = ({ label, value }: { label: string; value: string | string[] }) => {
   return (
     <div>
       <span style={{ marginRight: 5 }}>
@@ -27,19 +27,19 @@ export const ProfileInformation = ({
       </>
     );
   }
-  const { email, firstName, lastName, phone, city } = userData;
+  const { emailAddress, firstName, lastName, phoneInput, cityNames } = userData;
   return (
     <>
       <u>
         <h3>Your Submitted User Information</h3>
       </u>
       <div className="user-info">
-        <InfoRow label="Email" value={email} />
+        <InfoRow label="Email" value={emailAddress} />
         <InfoRow label="First Name" value={firstName} />
         <InfoRow label="Last Name" value={lastName} />
-        <InfoRow label="City" value={city} />
+        <InfoRow label="City" value={cityNames} />
         {/* You will need to format the string "nnnnnnn" as "nn-nn-nn-n" */}
-        <InfoRow label="Phone" value={"12-34-56-7"} />
+        <InfoRow label="Phone" value={phoneInput} />
       </div>
     </>
   );
